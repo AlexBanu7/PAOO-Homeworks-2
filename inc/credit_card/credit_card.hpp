@@ -4,15 +4,16 @@
 
 namespace credit_card {
 
+template<typename T>
 class CreditCard : public payment_method::PaymentMethod{
 private:
     char* number;
-    char* expiry_date;
+    T* expiry_date;
     char* owner;
     char* cvv;
 
 public:
-    CreditCard(const char* given_number, const char* given_expiry_date, const char* given_owner, const char* given_cvv);  
+    CreditCard(const char* given_number, const T* given_expiry_date, const char* given_owner, const char* given_cvv);  
 
     ~CreditCard();
 

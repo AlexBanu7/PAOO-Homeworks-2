@@ -2,11 +2,11 @@
 #include <credit_card/credit_card.hpp>
 #include <cstring>
 
-
 namespace credit_card {
 using namespace std; // Allows you to use standard library functions without "std::"
 
-CreditCard::CreditCard(const char* given_number, const char* given_expiry_date, const char* given_owner, const char* given_cvv) {
+
+CreditCard<char>::CreditCard(const char* given_number, const char* given_expiry_date, const char* given_owner, const char* given_cvv) {
     number = static_cast<char*>(malloc(strlen(given_number) + 1));
     expiry_date = static_cast<char*>(malloc(strlen(given_expiry_date) + 1));
     owner = static_cast<char*>(malloc(strlen(given_owner) + 1));
@@ -17,14 +17,14 @@ CreditCard::CreditCard(const char* given_number, const char* given_expiry_date, 
     strcpy(cvv, given_cvv);
 }   
 
-CreditCard::~CreditCard() {
+CreditCard<char>::~CreditCard() {
     free(number);
     free(expiry_date);
     free(owner);
     free(cvv);
 }
 
-CreditCard::CreditCard(const CreditCard& another_card){
+CreditCard<char>::CreditCard(const CreditCard& another_card){
     number = static_cast<char*>(malloc(strlen(another_card.number) + 1));
     expiry_date = static_cast<char*>(malloc(strlen(another_card.expiry_date) + 1));
     owner = static_cast<char*>(malloc(strlen(another_card.owner) + 1));
@@ -35,7 +35,7 @@ CreditCard::CreditCard(const CreditCard& another_card){
     strcpy(cvv, another_card.cvv);
 }
 
-CreditCard& CreditCard::operator=(const CreditCard& another_card) {
+CreditCard<char>& CreditCard<char>::operator=(const CreditCard& another_card) {
     if(this == &another_card){
         return *this;
     }
@@ -57,7 +57,7 @@ CreditCard& CreditCard::operator=(const CreditCard& another_card) {
     return *this;
 }
 
-CreditCard* CreditCard::move(CreditCard&& other) {
+CreditCard<char>* CreditCard<char>::move(CreditCard&& other) {
     number = other.number;
     expiry_date = other.expiry_date;
     owner = other.owner;
@@ -68,19 +68,19 @@ CreditCard* CreditCard::move(CreditCard&& other) {
     other.cvv = nullptr;
 }
 
-char* CreditCard::get_number() {
+char* CreditCard<char>::get_number() {
     return number;
 }
 
-char* CreditCard::get_expiry_date() {
+char* CreditCard<char>::get_expiry_date() {
     return expiry_date;
 }
 
-char* CreditCard::get_owner() {
+char* CreditCard<char>::get_owner() {
     return owner;
 }
 
-char* CreditCard::get_cvv() {
+char* CreditCard<char>::get_cvv() {
     return cvv;
 }
 } // namespace credit_card
